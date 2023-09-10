@@ -1,0 +1,78 @@
+Algoritmo sin_titulo
+	
+	Definir  NombreApellido, Categoria, Cat, Seguir, NombreGanadorM, NombreGanadorC Como Cadena
+	Definir TotalParticipantes, NumDoc, NumCorre, CorreDesc, NroGanadorM, NroGanadorC Como Entero
+	Definir TiempoTotal, TiempoMayorC, TiempoMayorM Como Real
+	
+	TiempoMayorC = 240
+	TiempoMayorM = 240
+	
+	Mostrar "Ingrese la cantidad de corredores"
+	Leer TotalParticipantes
+	
+	Para  i<-1 Hasta TotalParticipantes Hacer
+		Mostrar "Ingrese nombre y apellido del participante numero: " i
+		Leer NombreApellido
+		Mostrar "Ingrese documento del participante: " 
+		Leer NumDoc
+		
+		Repetir
+			Mostrar "Ingrese la Categoria a correr por el corredor. M/C"
+			Mostrar "M = Media - 4 Kilometros"
+			Mostrar "C = Completa - 10 Kilometros"
+			Leer Categoria
+			
+			Si Categoria <> "M" y Categoria <> "C" Entonces
+				Mostrar "Ingreso un dato invalido"	
+			FinSi
+			
+		Hasta Que Mayusculas(Categoria) = "M" o Mayusculas(Categoria) = "C"
+		Si Categoria = "M" Entonces
+			Categoria = "Media"
+			Cat = "M"
+		SiNo
+			Si Categoria = "C" Entonces
+				Categoria= "Completa"
+				Cat = "C"
+			FinSi
+		FinSi
+		
+		NumCorre = NumCorre + 1
+		
+		Mostrar "Numero del corredor: " NumCorre
+		Si Cat = "M" Entonces
+			Mostrar "Ingrese el tiempo total: " 
+			Leer  TiempoTotal
+			Si TiempoTotal > 240
+				CorreDesc = CorreDesc + 1
+				FinSi
+				Si TiempoTotal<TiempoMayorM Entonces
+			TiempoMayorM = TiempoTotal
+			NombreGanadorM = NombreApellido
+			NroGanadorM = NumCorre
+				FinSi
+		SiNo
+			Si Cat = "C" Entonces
+				Mostrar "Ingrese el tiempo total: " 
+				Leer  TiempoTotal
+				Si TiempoTotal > 240
+					CorreDesc = CorreDesc + 1
+				FinSi
+				Si TiempoTotal<TiempoMayorC Entonces
+					TiempoMayorC = TiempoTotal
+					NombreGanadorC = NombreApellido
+					NroGanadorC = NumCorre
+				FinSi
+			FinSi
+		FinSi
+	FinPara
+	
+	Mostrar "Cantidad Corredores : " TotalParticipantes	
+	Mostrar "Cantidad Corredores Descalificados: "	CorreDesc
+	Mostrar "Ganador categoria 10 kilometros"	
+	Mostrar "Nombre: " NombreGanadorC "- Nro Corredor: " NroGanadorC
+	Mostrar "Ganador categoria 4 kilometros"	
+	Mostrar "Nombre: " NombreGanadorM "- Nro Corredor: " NroGanadorM
+	
+	
+FinAlgoritmo
