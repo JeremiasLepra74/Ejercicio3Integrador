@@ -1,0 +1,82 @@
+TotalPedidos = 0
+	
+	Repetir
+		Mostrar "Razon Social: "
+		Leer RazCln
+		Mostrar "Direccion de entrega: "
+		Leer Direcc
+		
+		Repetir
+		Mostrar "1- Bidon transparente material virgen x 5 lts. "
+		Mostrar "2- Rociador valvula push 250cc"
+		Mostrar "3- Pulverizador gatillo 400cc"
+		Mostrar "4- Pulverizador gatillo 1000cc"
+		Mostrar "5- Botellas pet por 1lt - 1/2lt - 1/4lt"
+		Leer ArtMayorista
+		Si ArtMayorista<1 o ArtMayorista > 5 Entonces
+				Mostrar "Ingreso un numero invalido, por favor reingreselo"
+			FinSi
+		Hasta Que ArtMayorista <= 5 y ArtMayorista >=1
+		
+		Mostrar "Ingrese el precio unitario: " 
+		Leer PrecioUnitario
+		
+		Repetir
+			Mostrar "ingrese la cantida de articulos a comprar"
+			Leer CantPedida
+			Si CantPedida < 20 Entonces
+				Mostrar "El minimo de compra es de 20 articulos"
+			FinSi
+		Hasta Que CantPedida >= 20
+		TotalArtPedidos = TotalArtPedidos + CantPedida
+		
+		PrecioTotalSinIva = PrecioUnitario * CantPedida
+		PrecioTotalConIva = (PrecioUnitario * CantPedida) * Iva
+		
+		Repetir
+			Mostrar "Ingrese el metodo de pago"
+			Mostrar "E- Efectivo "
+			Mostrar "TD- Transferia o Deposito"
+			Mostrar "CH - Cheque a 30 días"
+			Leer MedPago
+			Si MedPago <> "E" y MedPago <> "TD" y MedPago <> "CH"
+				Mostrar "ingreso una letra invalida"
+			FinSi
+		Hasta Que MedPago = "E" o MedPago = "TD" o MedPago = "CH"
+		
+		Segun MedPago Hacer
+			"E": 
+				PrecioTotalSinIva = (PrecioUnitario * CantPedida) * 0.85
+				PrecioTotalConIva = PrecioTotalConIva * 0.85
+			"TD":
+				PrecioTotalSinIva = (PrecioUnitario * CantPedida) * 0.95
+				PrecioTotalConIva = PrecioTotalConIva * 0.95
+			"CH": 
+				PrecioTotalSinIva = PrecioUnitario * CantPedida
+				PrecioTotalConIva = PrecioTotalConIva
+		FinSegun
+		
+		Si CantPedida >= 100 Entonces
+			PrecioTotalSinIva = PrecioTotalSinIva * 0.98
+			PrecioTotalConIva = PrecioTotalConIva * 0.98
+		FinSi
+		
+		Mostrar "Razon Social: " RazCln
+		Mostrar "Direccion de entrega: " Direcc
+		Mostrar "Codigo articulo: " ArtMayorista
+		Mostrar "Precio unitario: $" PrecioUnitario
+		Mostrar "Cantidad pedida: " CantPedida
+		Mostrar "Medio de pago: " MedPago
+		Mostrar "Monto a abonar sin IVA : $" PrecioTotalSinIva " Con iva: $" PrecioTotalConIva
+		TotalPedidos = TotalPedidos + 1
+		MontoTotal = MontoTotal + PrecioTotalSinIva
+		
+		Mostrar "Desea ingresar otra venta? S/N" 
+		Leer Seguir
+		
+	Hasta Que Mayusculas(Seguir) = "N"
+	
+	Mostrar "Cantidad de pedidos: " TotalPedidos
+	Mostrar "Cantidad articulos pedidos: " TotalArtPedidos
+	Mostrar "Monto total de los pedidos sin iva: " MontoTotal
+FinAlgoritmo
